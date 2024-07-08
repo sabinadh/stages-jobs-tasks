@@ -24,7 +24,8 @@ stages:
     - script: echo running unit tests for backend app
       displayName: unit tests backend
 
-- stage: DeployDev
+- stage: DeployDev 
+  dependsOn: BuildApp
   displayName: Deploy to DEV environment
   jobs:
   - job: DeployFrontendDev
@@ -40,6 +41,7 @@ stages:
       displayName: deploy backend app to DEV
 
 - stage: DeployProd
+  dependsOn: DeployDev
   displayName: Deploy to PROD environment
   pool:
     vmImage: 'macOS-latest'
