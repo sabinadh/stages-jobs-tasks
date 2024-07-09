@@ -41,10 +41,12 @@ stages:
       displayName: deploy backend app to DEV
 
 - stage: DeployProd
-  dependsOn: DeployDev
+  dependsOn:
+  - BuildApp
+  - DeployDev
   displayName: Deploy to PROD environment
   pool:
-    vmImage: 'macOS-latest'
+    vmImage: 'ubuntu-latest'
   jobs:
   - job: DeployFrontendProd
     displayName: Deploy frontend to PROD
